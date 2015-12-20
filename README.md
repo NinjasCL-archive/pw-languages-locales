@@ -1,17 +1,16 @@
 # Processwire Language Locales
-This module adds the following properties to *language* template.
+This module adds new properties to *language* template
+related to locale info.
 
 ## Example Usage
 
 ```php
 <?php 
+
 echo '<ul>';
 
 foreach ($languages as $language):
 
-echo "<li>{$language->template}</li>";
-echo "<li>{$language->name}</li>";
-echo "<li>{$language->title}</li>";
 echo "<li>{$language->locale}</li>";
 echo "<li>{$language->localeUnderscore}</li>";
 echo "<li>{$language->localeCode}</li>";
@@ -23,4 +22,16 @@ echo "<li>{$language->localeCountryCode}</li>";
 endforeach; 
 
 echo '</ul>';
+```
+
+**Output**
+
+```
+es-CL
+es_CL
+es
+Español (Chile)
+Español
+Chile
+CL
 ```
