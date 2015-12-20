@@ -1,0 +1,142 @@
+<?php
+/**
+ * Language Locales (0.0.1)
+ * This module adds locale properties to the language template.
+ * 
+ * @author Camilo Castro <camilo@ninjas.cl>
+ * https://github.com/NinjasCL/pw-languages-locales
+ * For ProcessWire 2.x
+ * MIT LICENCE
+ */
+class LanguageLocales extends WireData implements Module {
+
+	public static function getModuleInfo() {
+
+		return array(
+				'title' => 'Language Locales',
+				'summary' => 'Add locale properties to language template',
+				'version' => 1,
+				'author' => 'Camilo Castro (clsource)',
+				'autoload' => true,
+				'singular' => true
+				);
+	}
+
+	public function __construct() {
+
+	}
+
+	public function init() {
+
+	}
+
+	public function ___install() {
+		
+	}
+
+	public function ___uninstall() {
+		
+	}
+
+	public function ready() {
+
+		$this->addHookProperty('Page::locale', $this, 'addLocaleProperty');
+
+		$this->addHookProperty('Page::localeUnderscore', $this, 'addLocaleUnderscoreProperty');
+
+		$this->addHookProperty('Page::localeCode', $this, 'addLocaleCodeProperty');
+
+		$this->addHookProperty('Page::localeName', $this, 'addLocaleNameProperty');
+
+		$this->addHookProperty('Page::localeLanguageName', $this, 'addLocaleLanguageNameProperty');
+
+		$this->addHookProperty('Page::localeCountry', $this, 'addLocaleCountryProperty');
+
+		$this->addHookProperty('Page::localeCountryCode', $this, 'addLocaleCountryCodeProperty');
+	}
+
+	// Public Methods for Added Properties
+
+	/**
+	* Add locale string property to language template
+	* example: es-CL
+	*/
+	public function addLocaleProperty(HookEvent $event) {
+		
+		if (self::isLanguageTemplate($event)) {
+			$event->return = 'es-CL';
+		}
+	}
+
+	/**
+	* Add locale string but with underscore property to language template
+	* example: es_CL
+	*/
+	public function addLocaleUnderscoreProperty(HookEvent $event) {
+		
+		if (self::isLanguageTemplate($event)) {
+			$event->return = 'es_CL';
+		}
+	}
+
+	/**
+	* Add locale language code property to language template
+	* example: es
+	*/
+	public function addLocaleCodeProperty(HookEvent $event) {
+		
+		if (self::isLanguageTemplate($event)) {
+			$event->return = 'es';	
+		}
+	}
+
+	/**
+	* Add locale name property to language template
+	* example: Español (Chile)
+	*/
+	public function addLocaleNameProperty(HookEvent $event) {
+
+		if (self::isLanguageTemplate($event)) {
+			$event->return = 'Español (Chile)';
+		}
+	}
+
+	/**
+	* Add locale language property to language template
+	* example: Español
+	*/
+	public function addLocaleLanguageNameProperty(HookEvent $event) {
+
+		if (self::isLanguageTemplate($event)) {
+			$event->return = 'Español';
+		}
+	}
+
+	/**
+	* Add locale country property to language template
+	* example: Chile
+	*/
+	public function addLocaleCountryProperty(HookEvent $event) {
+
+		if (self::isLanguageTemplate($event)) {
+			$event->return = 'Chile';
+		}
+	}
+
+	/**
+	* Add locale country code property to language template
+	* example: CL
+	*/
+	public function addLocaleCountryCodeProperty(HookEvent $event) {
+
+		if (self::isLanguageTemplate($event)) {
+			$event->return = 'CL';
+		}
+	}
+
+	// Private Methods 
+
+	private function isLanguageTemplate(HookEvent $event) {
+		return ($event->object->template == 'language');
+	}
+}
